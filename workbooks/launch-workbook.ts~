@@ -1,0 +1,100 @@
+export const launchWorkbook = {
+  phase: "LAUNCH™",
+  weeks: [
+    {
+      week: 31,
+      title: "Digital Presence",
+      workbookPages: [
+        {
+          page: 1,
+          title: "Digital Presence Audit",
+          directions: "Review your online presence, identify strengths, remove unprofessional content, and outline improvements."
+        },
+        {
+          page: 2,
+          title: "Professional Profile",
+          directions: "Draft a professional biography for LinkedIn or your digital portfolio."
+        }
+      ],
+      reflection: "What impression does your online presence leave?",
+      portfolioArtifact: "Professional Digital Profile"
+    },
+    {
+      week: 32,
+      title: "Career Action Plan",
+      workbookPages: [
+        {
+          page: 3,
+          title: "Career Roadmap",
+          directions: "Create a 1-year, 3-year, and 5-year career roadmap with milestones."
+        }
+      ],
+      reflection: "What is the next action that moves you toward your goal?",
+      portfolioArtifact: "Career Action Plan"
+    },
+    {
+      week: 33,
+      title: "Capstone Portfolio Build",
+      workbookPages: [
+        {
+          page: 4,
+          title: "Portfolio Checklist",
+          directions: "Organize your evidence, reflections, certifications, badges, projects, and résumé."
+        },
+        {
+          page: 5,
+          title: "Portfolio Reflection",
+          directions: "Explain how each artifact demonstrates a Future Ready™ competency."
+        }
+      ],
+      reflection: "Which artifact best represents your growth?",
+      portfolioArtifact: "Completed Future Ready™ Portfolio"
+    },
+    {
+      week: 34,
+      title: "Community Impact",
+      workbookPages: [
+        {
+          page: 6,
+          title: "Impact Proposal",
+          directions: "Design a project that creates measurable value in your school or community."
+        }
+      ],
+      reflection: "How will your talents improve your community?",
+      portfolioArtifact: "Community Impact Proposal"
+    },
+    {
+      week: 35,
+      title: "Future Ready Showcase",
+      workbookPages: [
+        {
+          page: 7,
+          title: "Presentation Planner",
+          directions: "Prepare your showcase presentation with key accomplishments, evidence, and future goals."
+        }
+      ],
+      reflection: "What accomplishment are you most proud to share?",
+      portfolioArtifact: "Showcase Presentation"
+    },
+    {
+      week: 36,
+      title: "My Next Chapter",
+      workbookPages: [
+        {
+          page: 8,
+          title: "Letter to My Future Self",
+          directions: "Write a letter describing your goals, values, and commitments for the next five years."
+        },
+        {
+          page: 9,
+          title: "Graduation Reflection",
+          directions: "Reflect on your Future Ready™ journey and identify how you have grown."
+        }
+      ],
+      reflection: "How has Future Ready™ prepared you for your next chapter?",
+      portfolioArtifact: "Future Ready™ Graduation Reflection"
+    }
+  ]
+};
+
+export default launchWorkbook;
