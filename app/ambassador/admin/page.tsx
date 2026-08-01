@@ -6,7 +6,7 @@ type Student = {
   id: string;
   userId: string;
   name: string;
-  email: string;
+  email: string;e
   grade: string;
   readinessScore: number;
   status: string;

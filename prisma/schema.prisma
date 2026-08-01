@@ -2,7 +2,7 @@ generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
 }
-
+app/ambassador/student-dashboard/[id]/page.tsx
 datasource db {
   provider = "postgresql"
 }

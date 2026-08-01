@@ -1,0 +1,24 @@
+Future Ready™ Lesson Builder
+
+This update was built against the uploaded future-ready-v2 project.
+
+Adds:
+- /ambassador/lesson-builder
+- Admin-controlled facilitator Lesson Builder permissions
+- Protected Future Ready™ master curriculum
+- Ambassador/cohort lesson customization
+- Activities, role play, improv, case scenarios, reflections, timing, materials, speakers, and resources
+- Draft, approval, and publish workflow
+- Published school version displayed on the weekly curriculum page
+- Lesson Builder link in the Ambassador navigation
+
+Install:
+cd ~/future-ready-v2
+unzip -o ~/Downloads/Future-Ready-Lesson-Builder.zip -d ~/future-ready-v2
+npx tsc --noEmit
+
+Open permissions:
+http://localhost:3000/ambassador/admin/permissions
+
+Open Lesson Builder:
+http://localhost:3000/ambassador/lesson-builder
