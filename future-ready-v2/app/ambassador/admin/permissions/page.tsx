@@ -13,6 +13,11 @@ type PermissionKey =
   | "facilitatorBlastCohort"
   | "facilitatorManageAttendance"
   | "facilitatorAssignProfessionals"
+  | "facilitatorLessonBuilder"
+  | "facilitatorAddActivities"
+  | "facilitatorUploadLessonResources"
+  | "facilitatorPublishLessonChanges"
+  | "facilitatorEditCoreCurriculum"
   | "professionalEditProfile"
   | "professionalUploadResources"
   | "professionalMessageFacilitator"
@@ -48,6 +53,11 @@ const defaults: Permissions = {
   facilitatorBlastCohort: true,
   facilitatorManageAttendance: true,
   facilitatorAssignProfessionals: true,
+  facilitatorLessonBuilder: false,
+  facilitatorAddActivities: true,
+  facilitatorUploadLessonResources: true,
+  facilitatorPublishLessonChanges: false,
+  facilitatorEditCoreCurriculum: false,
 
   professionalEditProfile: true,
   professionalUploadResources: true,
@@ -142,6 +152,31 @@ const sections: Array<{
         key: "facilitatorAssignProfessionals",
         label: "Assign professionals",
         detail: "Facilitators can connect approved professionals to sessions.",
+      },
+      {
+        key: "facilitatorLessonBuilder",
+        label: "Use Lesson Builder",
+        detail: "Facilitators can create an Ambassador/cohort version without changing the Future Ready™ master lesson.",
+      },
+      {
+        key: "facilitatorAddActivities",
+        label: "Add activities and delivery notes",
+        detail: "Facilitators can add role plays, improv, case scenarios, timing, and local delivery notes.",
+      },
+      {
+        key: "facilitatorUploadLessonResources",
+        label: "Add lesson resources",
+        detail: "Facilitators can add workbooks, slides, handouts, videos, activities, and shared links.",
+      },
+      {
+        key: "facilitatorPublishLessonChanges",
+        label: "Publish changes without approval",
+        detail: "When off, facilitator changes are submitted to the admin for approval before students see them.",
+      },
+      {
+        key: "facilitatorEditCoreCurriculum",
+        label: "Edit protected core curriculum",
+        detail: "Keep off to protect Future Ready™ objectives, competencies, assessments, badges, and master language.",
       },
     ],
   },
