@@ -1,0 +1,4 @@
+app/api/.DS_Store
+app/api/ambassador/admin/route.ts
+app/api/attendance/route.ts
+app/api/auth/[...nextauth]/route.ts
