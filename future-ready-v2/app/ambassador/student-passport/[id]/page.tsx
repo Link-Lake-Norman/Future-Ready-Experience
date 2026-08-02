@@ -81,7 +81,7 @@ export default async function StudentPassportPage({
         <PassportLink
           href={`/ambassador/student-portal/${student.id}`}
           title="Complete Student Record"
-          description="Readiness, attendance, skills, and 36-week progress."
+          description="Readiness, attendance, skills, and 16-week Ambassador Pilot progress."
         />
       </section>
     </div>

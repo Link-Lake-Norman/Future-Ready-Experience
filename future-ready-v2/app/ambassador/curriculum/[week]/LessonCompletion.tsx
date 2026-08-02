@@ -25,7 +25,7 @@ function readCompletedWeeks(): number[] {
 
     return parsed
       .filter((value): value is number => typeof value === "number")
-      .filter((value) => Number.isInteger(value) && value >= 1 && value <= 36)
+      .filter((value) => Number.isInteger(value) && value >= 1 && value <= 16)
       .sort((a, b) => a - b);
   } catch {
     return [];
@@ -49,7 +49,7 @@ export default function LessonCompletion({
   const isComplete = completedWeeks.includes(week);
 
   const progress = useMemo(
-    () => Math.round((completedWeeks.length / 36) * 100),
+    () => Math.round((completedWeeks.length / 16) * 100),
     [completedWeeks.length],
   );
 
@@ -114,7 +114,7 @@ export default function LessonCompletion({
 
           <div className="mt-5 flex flex-wrap gap-3">
             <span className="rounded-full bg-white px-4 py-2 text-sm font-black text-[#0D1B3D] shadow-sm">
-              {completedWeeks.length} of 36 weeks complete
+              {completedWeeks.length} of 16 weeks complete
             </span>
 
             <span className="rounded-full bg-white px-4 py-2 text-sm font-black text-[#0D1B3D] shadow-sm">

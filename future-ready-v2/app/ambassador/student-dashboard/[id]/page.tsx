@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  curriculum,
-  students,
-} from "@/content/platform";
+import { students } from "@/content/platform";
+import { ambassadorPilot } from "@/content/ambassador-pilot";
 
 type PageProps = {
   params: Promise<{
@@ -56,7 +54,7 @@ export default async function StudentDashboardPage({
     notFound();
   }
 
-  const currentLesson = curriculum.find(
+  const currentLesson = ambassadorPilot.find(
     (item) => item.week === student.currentWeek
   );
 
@@ -66,7 +64,7 @@ export default async function StudentDashboardPage({
   );
 
   const journeyProgress = Math.round(
-    (completedWeeks / 36) * 100
+    (completedWeeks / 16) * 100
   );
 
   const portfolioItems = 5;
@@ -176,8 +174,8 @@ export default async function StudentDashboardPage({
       <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         <DashboardStat
           label="Current Week"
-          value={`${student.currentWeek}/36`}
-          detail="Future Ready™ journey"
+          value={`${student.currentWeek}/16`}
+          detail="Ambassador Pilot journey"
         />
 
         <DashboardStat
@@ -208,7 +206,7 @@ export default async function StudentDashboardPage({
               </p>
 
               <h2 className="mt-2 text-3xl font-black text-[#0D1B3D]">
-                36-Week Progress
+                16-Week Progress
               </h2>
             </div>
 
@@ -227,7 +225,7 @@ export default async function StudentDashboardPage({
           </div>
 
           <div className="mt-8 grid grid-cols-6 gap-2 sm:grid-cols-9">
-            {curriculum.map((week) => {
+            {ambassadorPilot.map((week) => {
               const complete =
                 week.week < student.currentWeek;
 
@@ -257,59 +255,39 @@ export default async function StudentDashboardPage({
             })}
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          <div className="mt-8 grid gap-3 sm:grid-cols-4">
             <JourneyPhase
               name="Discover"
-              weeks="Weeks 1–6"
-              active={student.currentWeek <= 6}
-              complete={student.currentWeek > 6}
+              weeks="Weeks 1–4"
+              active={student.currentWeek <= 4}
+              complete={student.currentWeek > 4}
             />
 
             <JourneyPhase
               name="Develop"
-              weeks="Weeks 7–12"
+              weeks="Weeks 5–8"
               active={
-                student.currentWeek >= 7 &&
+                student.currentWeek >= 5 &&
+                student.currentWeek <= 8
+              }
+              complete={student.currentWeek > 8}
+            />
+
+            <JourneyPhase
+              name="Explore"
+              weeks="Weeks 9–12"
+              active={
+                student.currentWeek >= 9 &&
                 student.currentWeek <= 12
               }
               complete={student.currentWeek > 12}
             />
 
             <JourneyPhase
-              name="Explore"
-              weeks="Weeks 13–18"
-              active={
-                student.currentWeek >= 13 &&
-                student.currentWeek <= 18
-              }
-              complete={student.currentWeek > 18}
-            />
-
-            <JourneyPhase
               name="Connect"
-              weeks="Weeks 19–24"
-              active={
-                student.currentWeek >= 19 &&
-                student.currentWeek <= 24
-              }
-              complete={student.currentWeek > 24}
-            />
-
-            <JourneyPhase
-              name="Experience"
-              weeks="Weeks 25–30"
-              active={
-                student.currentWeek >= 25 &&
-                student.currentWeek <= 30
-              }
-              complete={student.currentWeek > 30}
-            />
-
-            <JourneyPhase
-              name="Launch"
-              weeks="Weeks 31–36"
-              active={student.currentWeek >= 31}
-              complete={student.currentWeek > 36}
+              weeks="Weeks 13–16"
+              active={student.currentWeek >= 13}
+              complete={student.currentWeek > 16}
             />
           </div>
         </article>

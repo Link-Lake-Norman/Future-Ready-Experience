@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { curriculum } from "@/content/platform";
+import { ambassadorPilot } from "@/content/ambassador-pilot";
 import LessonCompletion from "./LessonCompletion";
 
 type PageProps = {
@@ -15,7 +15,7 @@ export default async function CurriculumPage({
   const { week } = await params;
   const weekNumber = Number(week);
 
-  const lesson = curriculum.find(
+  const lesson = ambassadorPilot.find(
     (item) => item.week === weekNumber,
   );
 
@@ -27,14 +27,18 @@ export default async function CurriculumPage({
     <div className="space-y-8">
       <header className="rounded-3xl bg-[#0D1B3D] px-8 py-10 text-white">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#F2B705]">
-          {lesson.phase} · Week {lesson.week}
+          {lesson.phase} · Week {lesson.week} of 16
         </p>
 
         <h1 className="mt-3 text-4xl font-black">
           {lesson.title}
         </h1>
 
-        <p className="mt-4 text-lg leading-8 text-slate-200">
+        <p className="mt-4 text-lg italic leading-8 text-slate-200">
+          {lesson.essentialQuestion}
+        </p>
+
+        <p className="mt-3 text-lg leading-8 text-slate-200">
           {lesson.objective}
         </p>
       </header>
@@ -43,48 +47,80 @@ export default async function CurriculumPage({
         week={lesson.week}
         title={lesson.title}
         badgeEarned={lesson.badgeEarned}
-        portfolioEvidence={lesson.portfolioEvidence}
+        portfolioEvidence={lesson.portfolioArtifact}
       />
 
       <section className="grid gap-8 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="space-y-8">
-          <Section
-            title="Facilitator Guide"
-            content={lesson.facilitatorGuide}
-          />
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <p className="text-sm font-black uppercase tracking-[0.16em] text-[#725500]">
+              Facilitator Guide
+            </p>
+            <h2 className="mt-2 text-3xl font-black text-[#0D1B3D]">
+              Lesson Outcomes
+            </h2>
 
-          {lesson.dailyLessons?.length ? (
-            <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-              <h2 className="text-3xl font-black text-[#0D1B3D]">
-                Daily Lessons
-              </h2>
+            <ul className="mt-5 space-y-2">
+              {lesson.outcomes.map((outcome, index) => (
+                <li key={`${lesson.week}-outcome-${index}`} className="leading-7 text-slate-700">
+                  • {outcome}
+                </li>
+              ))}
+            </ul>
 
-              <div className="mt-6 space-y-5">
-                {lesson.dailyLessons.map((day) => (
-                  <div
-                    key={`${lesson.week}-${day.day}`}
-                    className="rounded-2xl bg-slate-50 p-6"
-                  >
-                    <p className="text-sm font-black uppercase tracking-[0.16em] text-[#725500]">
-                      {day.day}
-                    </p>
-                    <h3 className="mt-2 text-xl font-black text-[#0D1B3D]">
-                      {day.title}
-                    </h3>
-                    <p className="mt-3 leading-7 text-slate-700">
-                      <strong>Objective:</strong> {day.objective}
-                    </p>
-                    <p className="mt-2 leading-7 text-slate-700">
-                      <strong>Activity:</strong> {day.activity}
-                    </p>
-                    <p className="mt-2 leading-7 text-slate-700">
-                      <strong>Reflection:</strong> {day.reflection}
-                    </p>
+            <h3 className="mt-6 text-xl font-black text-[#0D1B3D]">Preparation</h3>
+            <ul className="mt-3 space-y-2">
+              {lesson.preparation.map((item, index) => (
+                <li key={`${lesson.week}-prep-${index}`} className="leading-7 text-slate-700">
+                  • {item}
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="mt-6 text-xl font-black text-[#0D1B3D]">Lesson Flow</h3>
+            <div className="mt-3 space-y-3">
+              {lesson.lessonFlow.map((segment, index) => (
+                <div key={`${lesson.week}-flow-${index}`} className="rounded-xl bg-slate-50 p-4">
+                  <p className="font-black text-[#0D1B3D]">
+                    {segment.segment} <span className="font-normal text-slate-500">({segment.minutes} min)</span>
+                  </p>
+                  <p className="mt-1 leading-7 text-slate-700">{segment.instructions}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="mt-6 text-xl font-black text-[#0D1B3D]">Facilitator Notes</h3>
+            <p className="mt-2 leading-7 text-slate-700">{lesson.facilitatorNotes}</p>
+
+            <h3 className="mt-6 text-xl font-black text-[#0D1B3D]">Differentiation</h3>
+            <p className="mt-2 leading-7 text-slate-700">{lesson.differentiation}</p>
+
+            <h3 className="mt-6 text-xl font-black text-[#0D1B3D]">Speaker Guide</h3>
+            <p className="mt-2 leading-7 text-slate-700">Recommended guest: {lesson.recommendedSpeaker}</p>
+          </article>
+
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-3xl font-black text-[#0D1B3D]">
+              Classroom Activities
+            </h2>
+
+            <div className="mt-5 space-y-4">
+              {lesson.activities.map((activity, index) => (
+                <div key={`${lesson.week}-activity-${index}`} className="rounded-2xl bg-slate-50 p-5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <p className="text-lg font-black text-[#0D1B3D]">{activity.name}</p>
+                    <span className="rounded-full bg-[#FFF3C4] px-3 py-1 text-xs font-black uppercase tracking-wide text-[#725500]">
+                      {activity.type} · {activity.minutes} min
+                    </span>
                   </div>
-                ))}
-              </div>
-            </article>
-          ) : null}
+                  <p className="mt-2 leading-7 text-slate-700">{activity.instructions}</p>
+                  <p className="mt-2 text-sm text-slate-500">
+                    Materials: {activity.materials.join(", ")}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </article>
 
           <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <h2 className="text-3xl font-black text-[#0D1B3D]">
@@ -108,29 +144,67 @@ export default async function CurriculumPage({
             </ol>
           </article>
 
-          <Section
-            title="Student Activity"
-            content={lesson.studentActivity}
-          />
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <p className="text-sm font-black uppercase tracking-[0.16em] text-[#725500]">
+              Student Workbook
+            </p>
+            <h2 className="mt-2 text-3xl font-black text-[#0D1B3D]">
+              {lesson.title}
+            </h2>
 
-          <Section
-            title="Workplace Connection"
-            content={lesson.workplaceConnection}
-          />
+            <div className="mt-5 space-y-4">
+              <div className="rounded-xl bg-slate-50 p-4">
+                <p className="font-black text-[#0D1B3D]">Warm-Up</p>
+                <p className="mt-1 leading-7 text-slate-700">{lesson.studentWorkbook.warmUp}</p>
+              </div>
 
-          {lesson.weeklyReflection ? (
-            <Section
-              title="Weekly Reflection"
-              content={lesson.weeklyReflection}
-            />
-          ) : null}
+              {lesson.studentWorkbook.workbookPages.map((page, index) => (
+                <div key={`${lesson.week}-page-${index}`} className="rounded-xl bg-slate-50 p-4">
+                  <p className="font-black text-[#0D1B3D]">{page.title}</p>
+                  <p className="mt-1 leading-7 text-slate-700">{page.directions}</p>
+                </div>
+              ))}
 
-          {lesson.homework ? (
-            <Section
-              title="Homework / Family Connection"
-              content={lesson.homework}
-            />
-          ) : null}
+              <div className="rounded-xl bg-slate-50 p-4">
+                <p className="font-black text-[#0D1B3D]">Reflection</p>
+                <p className="mt-1 leading-7 text-slate-700">{lesson.studentWorkbook.reflectionPrompt}</p>
+              </div>
+
+              <div className="rounded-xl bg-[#FFF3C4] p-4">
+                <p className="font-black text-[#0D1B3D]">AI Lab</p>
+                <p className="mt-1 leading-7 text-slate-700">{lesson.studentWorkbook.aiLabPrompt}</p>
+              </div>
+
+              <div className="rounded-xl bg-slate-50 p-4">
+                <p className="font-black text-[#0D1B3D]">Google Workspace</p>
+                <p className="mt-1 leading-7 text-slate-700">{lesson.studentWorkbook.googleWorkspaceTask}</p>
+              </div>
+
+              <div className="rounded-xl bg-slate-50 p-4">
+                <p className="font-black text-[#0D1B3D]">Employer Connection</p>
+                <p className="mt-1 leading-7 text-slate-700">{lesson.studentWorkbook.employerConnection}</p>
+              </div>
+
+              <div className="rounded-xl bg-slate-50 p-4">
+                <p className="font-black text-[#0D1B3D]">Exit Ticket</p>
+                <p className="mt-1 leading-7 text-slate-700">{lesson.studentWorkbook.exitTicket}</p>
+              </div>
+            </div>
+          </article>
+
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-3xl font-black text-[#0D1B3D]">
+              Workplace Connection
+            </h2>
+            <p className="mt-5 leading-8 text-slate-700">{lesson.workplaceConnection}</p>
+          </article>
+
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-3xl font-black text-[#0D1B3D]">
+              Homework / Family Connection
+            </h2>
+            <p className="mt-5 leading-8 text-slate-700">{lesson.homework}</p>
+          </article>
         </div>
 
         <div className="space-y-8">
@@ -151,38 +225,32 @@ export default async function CurriculumPage({
             </div>
           </article>
 
-          <Section
-            title="Portfolio Evidence"
-            content={lesson.portfolioEvidence}
-          />
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-2xl font-black text-[#0D1B3D]">
+              Assessment Rubric
+            </h2>
+            <ul className="mt-5 space-y-2">
+              {lesson.assessmentRubric.map((criterion, index) => (
+                <li key={`${lesson.week}-rubric-${index}`} className="leading-7 text-slate-700">
+                  ☐ {criterion}
+                </li>
+              ))}
+            </ul>
+          </article>
 
-          <Section
-            title="Badge Earned"
-            content={lesson.badgeEarned}
-          />
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-2xl font-black text-[#0D1B3D]">
+              Portfolio Artifact
+            </h2>
+            <p className="mt-5 leading-8 text-slate-700">{lesson.portfolioArtifact}</p>
+          </article>
 
-          {lesson.aiCoachPrompt ? (
-            <Section
-              title="AI Coach Prompt"
-              content={lesson.aiCoachPrompt}
-            />
-          ) : null}
-
-          {lesson.assessmentTitle ? (
-            <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-[#725500]">
-                Assessment
-              </p>
-              <h2 className="mt-2 text-2xl font-black text-[#0D1B3D]">
-                {lesson.assessmentTitle}
-              </h2>
-              {lesson.assessmentDescription ? (
-                <p className="mt-4 text-lg leading-8 text-slate-700">
-                  {lesson.assessmentDescription}
-                </p>
-              ) : null}
-            </article>
-          ) : null}
+          <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-2xl font-black text-[#0D1B3D]">
+              Badge Earned
+            </h2>
+            <p className="mt-5 leading-8 text-slate-700">{lesson.badgeEarned}</p>
+          </article>
         </div>
       </section>
 
@@ -198,7 +266,7 @@ export default async function CurriculumPage({
           <span />
         )}
 
-        {lesson.week < 36 ? (
+        {lesson.week < 16 ? (
           <Link
             href={`/ambassador/curriculum/${lesson.week + 1}`}
             className="rounded-xl bg-[#0D1B3D] px-5 py-3 font-black text-white"
@@ -215,25 +283,5 @@ export default async function CurriculumPage({
         )}
       </nav>
     </div>
-  );
-}
-
-function Section({
-  title,
-  content,
-}: {
-  title: string;
-  content: string;
-}) {
-  return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-      <h2 className="text-3xl font-black text-[#0D1B3D]">
-        {title}
-      </h2>
-
-      <p className="mt-5 whitespace-pre-line text-lg leading-8 text-slate-700">
-        {content}
-      </p>
-    </article>
   );
 }

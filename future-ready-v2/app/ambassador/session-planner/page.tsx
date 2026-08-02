@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { curriculum } from "@/content/platform";
+import { ambassadorPilot } from "@/content/ambassador-pilot";
 import {
   ambassadorOperations,
   type AmbassadorOperationWeek,
@@ -24,21 +24,15 @@ const PLANNER_KEY = "future-ready:ambassador-session-planner";
 const OPERATIONS_KEY = "future-ready:ambassador-operations";
 
 function createDefaults(): PlannerWeek[] {
-  return curriculum.map((lesson) => ({
+  return ambassadorPilot.map((lesson) => ({
     week: lesson.week,
     outcome: lesson.objective,
-    launch: "Use a quick movement, question, or paired introduction.",
+    launch: lesson.lessonFlow[0]?.instructions ?? "Use a quick movement, question, or paired introduction.",
     teamHuddle: lesson.discussionQuestions.join("\n"),
-    workplaceChallenge: lesson.studentActivity,
-    aiSkill:
-      lesson.aiCoachPrompt ||
-      "Use AI to improve one workplace-ready response, then explain what you changed.",
-    reflection:
-      lesson.weeklyReflection ||
-      "What did you learn, what did you practice, and what will you use next?",
-    nextStep:
-      lesson.homework ||
-      "Practice one skill from today's session before the next meeting.",
+    workplaceChallenge: lesson.activities.map((activity) => `${activity.name}: ${activity.instructions}`).join("\n"),
+    aiSkill: lesson.studentWorkbook.aiLabPrompt,
+    reflection: lesson.studentWorkbook.reflectionPrompt,
+    nextStep: lesson.homework,
     materials: "Workbook, facilitator guide, activity materials, and slides.",
     sessionNotes: "",
   }));
@@ -72,7 +66,7 @@ export default function SessionPlannerPage() {
     );
   }, [defaults]);
 
-  const lesson = curriculum.find((item) => item.week === selectedWeek);
+  const lesson = ambassadorPilot.find((item) => item.week === selectedWeek);
   const planner = weeks.find((item) => item.week === selectedWeek) ?? weeks[0];
   const operation =
     operations.find((item) => item.week === selectedWeek) ??
@@ -113,7 +107,7 @@ export default function SessionPlannerPage() {
                 onChange={(event) => setSelectedWeek(Number(event.target.value))}
                 className="rounded-xl border border-white/20 bg-white px-4 py-3 font-black text-[#0D1B3D]"
               >
-                {curriculum.map((item) => (
+                {ambassadorPilot.map((item) => (
                   <option key={item.week} value={item.week}>
                     Week {item.week} — {item.title}
                   </option>

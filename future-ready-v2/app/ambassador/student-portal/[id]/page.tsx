@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import StatCard from "@/components/StatCard";
-import {
-  curriculum,
-  students,
-} from "@/content/platform";
+import { students } from "@/content/platform";
+import { ambassadorPilot } from "@/content/ambassador-pilot";
 
 type PageProps = {
   params: Promise<{
@@ -25,7 +23,7 @@ export default async function StudentRecordPage({
     notFound();
   }
 
-  const lesson = curriculum.find(
+  const lesson = ambassadorPilot.find(
     (item) =>
       item.week === student.currentWeek
   );
@@ -156,11 +154,11 @@ export default async function StudentRecordPage({
 
       <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
         <h2 className="text-3xl font-black text-[#0D1B3D]">
-          36-Week Journey
+          16-Week Journey
         </h2>
 
         <div className="mt-7 grid grid-cols-4 gap-3 sm:grid-cols-6 lg:grid-cols-9">
-          {curriculum.map((week) => (
+          {ambassadorPilot.map((week) => (
             <Link
               key={week.week}
               href={`/ambassador/curriculum/${week.week}`}

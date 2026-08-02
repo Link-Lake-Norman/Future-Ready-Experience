@@ -107,7 +107,7 @@ export default function AmbassadorOperationsPage() {
                 Program Calendar
               </h2>
               <span className="rounded-full bg-[#FFF3C4] px-3 py-1 text-sm font-black text-[#725500]">
-                36 Weeks
+                16 Weeks
               </span>
             </div>
 

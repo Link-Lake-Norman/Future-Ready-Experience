@@ -82,7 +82,7 @@ async function getAmbassadorContext() {
       description:
         "Ambassador Christian School custom program powered by Future Ready™.",
       status: RecordStatus.ACTIVE,
-      totalWeeks: 36,
+      totalWeeks: 16,
       deletedAt: null,
     },
     create: {
@@ -92,7 +92,7 @@ async function getAmbassadorContext() {
       description:
         "Ambassador Christian School custom program powered by Future Ready™.",
       status: RecordStatus.ACTIVE,
-      totalWeeks: 36,
+      totalWeeks: 16,
       version: "1.0",
     },
   });

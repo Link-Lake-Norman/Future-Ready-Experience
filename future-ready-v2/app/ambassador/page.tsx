@@ -48,7 +48,7 @@ export default function AmbassadorDashboardPage() {
         <StatCard
           label="Current Week"
           value={organization.currentWeek}
-          detail="36-week curriculum"
+          detail="16-week Ambassador Pilot"
         />
 
         <StatCard
@@ -92,7 +92,7 @@ export default function AmbassadorDashboardPage() {
         <DashboardLink
           href="/ambassador/curriculum/1"
           title="Curriculum"
-          description="Open the complete 36-week Future Ready™ curriculum."
+          description="Open the complete 16-week Future Ready™ Ambassador Pilot curriculum."
         />
       </section>
     </div>

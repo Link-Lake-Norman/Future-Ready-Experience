@@ -358,7 +358,7 @@ export default function ProfessionalsPage() {
                   className={inputClass}
                 >
                   <option value="">Not assigned</option>
-                  {Array.from({ length: 36 }, (_, index) => index + 1).map(
+                  {Array.from({ length: 16 }, (_, index) => index + 1).map(
                     (week) => (
                       <option key={week} value={week}>
                         Week {week}
